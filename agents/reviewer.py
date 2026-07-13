@@ -7,16 +7,16 @@ def reviewer_agent(state):
     Review the following code.
 
     User Request:
-    {state.user_request}
+    {state["user_request"]}
 
     Planner Output:
-    {state.plan}
+    {state["plan"]}
 
     Research Output:
-    {state.research}
+    {state["research"]}
 
     Generated Code:
-    {state.code}
+    {state["code"]}
 
     Check for:
 
@@ -39,5 +39,6 @@ def reviewer_agent(state):
         ]
     )
 
-    state.review = response.choices[0].message.content
-    return state
+    return {
+        "review": response.choices[0].message.content
+    }

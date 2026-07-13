@@ -1,7 +1,40 @@
-from langgraph.graph import StateGraph
+from langgraph.graph import StateGraph, START, END
 from memory.state import AgentState
+from agents.planner import planner_agent
+from agents.researcher import research_agent
 
-# Create a new graph
+# Create the graph
 workflow = StateGraph(AgentState)
 
+# Add Planner node
+workflow.add_node("planner", planner_agent)
+
+# Add Research node
+workflow.add_node("research", research_agent)
+
+workflow.add_edge(START, "planner")
+workflow.add_edge("planner", "research")
+workflow.add_edge("research", END)
+
+# Compile the graph
+graph = workflow.compile()
+
 print("LangGraph workflow created successfully!")
+
+# Test the graph
+state = {
+    "user_request": "Build a portfolio website",
+    "plan": "",
+    "research": "",
+    "code": "",
+    "review": "",
+    "report": ""
+}
+
+result = graph.invoke(state)
+
+print("\n===== Planner Output =====")
+print(result["plan"])
+
+print("\n===== Research Output =====")
+print(result["research"])

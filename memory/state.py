@@ -1,8 +1,9 @@
-class AgentState:
-    def __init__(self, user_request):
-        self.user_request = user_request
-        self.plan = ""
-        self.research = ""
-        self.code = ""
-        self.review = ""
-        self.report = ""
+from typing import TypedDict
+
+class AgentState(TypedDict):
+    user_request: str
+    plan: str
+    research: str
+    code: str
+    review: str
+    report: str

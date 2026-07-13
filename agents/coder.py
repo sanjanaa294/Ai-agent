@@ -7,13 +7,13 @@ def coding_agent(state):
     Your job is to generate clean, well-structured Python code.
 
     User Request:
-    {state.user_request}
+    {state["user_request"]}
 
     Planner Output:
-    {state.plan}
+    {state["plan"]}
 
     Research Output:
-    {state.research}
+    {state["research"]}
 
     Write:
     1. Clean Python code
@@ -33,5 +33,6 @@ def coding_agent(state):
         ]
     )
 
-    state.code = response.choices[0].message.content
-    return state
+    return {
+        "code": response.choices[0].message.content
+    }

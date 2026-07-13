@@ -7,7 +7,7 @@ def planner_agent(state):
     Your job is to break the user's request into small, clear tasks.
 
     User Request:
-    {state.user_request}
+    {state["user_request"]}
 
     Return only a numbered list of tasks.
     """
@@ -22,5 +22,6 @@ def planner_agent(state):
         ]
     )
 
-    state.plan = response.choices[0].message.content
-    return state
+    return {
+        "plan": response.choices[0].message.content
+    }

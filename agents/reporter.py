@@ -7,19 +7,19 @@ def reporter_agent(state):
     Create a professional project report using the following information.
 
     User Request:
-    {state.user_request}
+    {state["user_request"]}
 
     Planner Output:
-    {state.plan}
+    {state["plan"]}
 
     Research Output:
-    {state.research}
+    {state["research"]}
 
     Coding Output:
-    {state.code}
+    {state["code"]}
 
     Reviewer Output:
-    {state.review}
+    {state["review"]}
 
     Generate a report with the following sections:
 
@@ -44,5 +44,6 @@ def reporter_agent(state):
         ]
     )
 
-    state.report = response.choices[0].message.content
-    return state
+    return {
+        "report": response.choices[0].message.content
+    }

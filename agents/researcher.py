@@ -7,10 +7,10 @@ def research_agent(state):
     Your job is to research the user's request based on the planner's task list.
 
     User Request:
-    {state.user_request}
+    {state["user_request"]}
 
     Planner Output:
-    {state.plan}
+    {state["plan"]}
 
     Give:
     1. Recommended technologies
@@ -32,5 +32,6 @@ def research_agent(state):
         ]
     )
 
-    state.research = response.choices[0].message.content
-    return state
+    return {
+        "research": response.choices[0].message.content
+    }
