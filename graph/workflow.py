@@ -36,8 +36,10 @@ graph = workflow.compile()
 print("LangGraph workflow created successfully!")
 
 # Test the graph
+user_request = input("What do you want to build? ")
+
 state = {
-    "user_request": "Build a portfolio website",
+    "user_request": user_request,
     "plan": "",
     "research": "",
     "code": "",
